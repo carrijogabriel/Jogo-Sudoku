@@ -19,6 +19,39 @@ import random
 #    return matriz
 
 
+def gerar_jogo_inicial_aleatorio():      ##função para gerar uma matriz de jogo inicial aleatória
+    matriz = np.zeros((9,9),dtype=int)   ##começo criando uma matriz 9x9 de zeros, com todos sendo do tipo inteiro
+    inicio_diagonais159 = [(0,0),(3,3),(6,6)]     ##completo os blocos 3x3 das diagonais do jogo, já que eles não relação entre si
+    for inicio_linha, inicio_coluna in inicio_diagonais159:
+        numeros = list(range(1,10))       ##crio uma ordem aleatória entre os números de 1 a 9 e vou completando em cada linha/coluna dessas diagonais
+        random.shuffle(numeros)
+        for i in range(3):
+            for j in range(3):
+                matriz[inicio_linha + i, inicio_coluna + j] = numeros[3 * i + j]
+    
+    ##agora tenho que colocar mais números nos outros blocos, completando-os e faço uma recursividade novamente  
+    def completar_restante():
+        for linha in range(9):
+            for coluna in range(9):
+                if matriz[linha, coluna] == 0:
+                    for num in range(1, 10):
+                        if verificar_sudoku(matriz, linha, coluna, num):
+                            matriz[linha, coluna] = num
+                            if completar_restante():
+                                return True
+                            matriz[linha, coluna] = 0
+                    return False
+        return True
+    completar_restante()
+    
+    ##embaralhar posições e remover números aleatoriamente, para depois fazer o jogo e completar
+    posicoes = [(i, j) for i in range(9) for j in range(9)]
+    random.shuffle(posicoes)                 ##separo as 81 posições aleatoriamente
+    num_visiveis = random.randint(30, 40)    ##faço um random para ver quantos números ficarão visíveis
+    for indice, (linha, coluna) in enumerate(posicoes):    ##pego o índice e qual a linha e coluna de cada posição
+        if indice >= num_visiveis:
+            matriz[linha, coluna] = 0         ##se o índice que estiver por maior que a quantidade de números visíveis, coloco 0 lá, que seria espaço vazio
+    return matriz
 
 
 def sudoku_legivel(jogo):                 ##função para deixar o jogo mais visível
