@@ -2,21 +2,23 @@
 import numpy as np
 import random
 
+##Inicialmente criei essa função para gerar uma matriz inicial aleatória, mas acabava que não seguia as regras de completá-la depois e todas dava sem solução
+#def gerar_jogo_inicial_aleatorio():      ##função para gerar uma matriz de jogo inicial aleatória
+#    matriz = np.zeros((9,9),dtype=int)   ##começo criando uma matriz 9x9 de zeros, com todos sendo do tipo inteiro
+#    numeros_adicionados = 0              ##variável para adicionar números no lugar dos 0, começa vazia
+#    while numeros_adicionados <= random.randint(30,40):     ##enquanto a quantidade de números adicionados for menor ou igual a 
+#                                                            ##a uma quantidade aleatória de números entre 30 e 40 que serão
+#                                                            ##gerados a cada jogo faço o restante
+#        linha = random.randint(0,8)                         ##uma linha aleatória
+#        coluna = random.randint(0,8)                        ##uma coluna aleatória
+#        numero = random.randint(1,9)                        ##um número aleatório
+#        if matriz[linha, coluna] == 0:
+#            if verificar_sudoku(matriz, linha, coluna, numero):
+#                matriz[linha, coluna] = numero
+#                numeros_adicionados += 1
+#    return matriz
 
-def gerar_jogo_inicial_aleatorio():      ##função para gerar uma matriz de jogo inicial aleatória
-    matriz = np.zeros((9,9),dtype=int)   ##começo criando uma matriz 9x9 de zeros, com todos sendo do tipo inteiro
-    numeros_adicionados = 0              ##variável para adicionar números no lugar dos 0, começa vazia
-    while numeros_adicionados <= random.randint(30,40):     ##enquanto a quantidade de números adicionados for menor ou igual a 
-                                                            ##a uma quantidade aleatória de números entre 30 e 40 que serão
-                                                            ##gerados a cada jogo faço o restante
-        linha = random.randint(0,8)                         ##uma linha aleatória
-        coluna = random.randint(0,8)                        ##uma coluna aleatória
-        numero = random.randint(1,9)                        ##um número aleatório
-        if matriz[linha, coluna] == 0:
-            if verificar_sudoku(matriz, linha, coluna, numero):
-                matriz[linha, coluna] = numero
-                numeros_adicionados += 1
-    return matriz
+
 
 
 def sudoku_legivel(jogo):                 ##função para deixar o jogo mais visível
